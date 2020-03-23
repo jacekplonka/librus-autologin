@@ -4,6 +4,8 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+
 import argparse
 from time import sleep
 
@@ -15,7 +17,9 @@ parser.add_argument('-t', type=int, help="Czas oczekiwania na zaladowanie strony
 args = parser.parse_args()
 timeout = args.t
 
-driver = webdriver.Chrome('./chromedriver')
+chrome_options = Options()
+chrome_options.add_argument("--window-size=1920,1080")
+driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)
 driver.get("https://portal.librus.pl/rodzina")
 
 try:
